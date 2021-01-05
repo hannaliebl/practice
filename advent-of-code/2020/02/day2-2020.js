@@ -1,6 +1,7 @@
 const fs = require("fs");
 const readline = require("readline");
 
+// part 1
 async function getValidPasswordCount() {
   let validCount = 0;
   // https://stackoverflow.com/questions/6156501/read-a-file-one-line-at-a-time-in-node-js
@@ -11,7 +12,7 @@ async function getValidPasswordCount() {
   });
 
   for await (const line of readLines) {
-    const lineArr = line.split(":");
+    const lineArr = line.split(": ");
     const password = lineArr[1];
     const searchTarget = lineArr[0].slice(-1);
     const occurences = lineArr[0].slice(0, lineArr[0].length - 2).split("-");
@@ -24,4 +25,34 @@ async function getValidPasswordCount() {
   console.log("valid count:", validCount);
 }
 
+// part 2
+async function getValidPasswordCountNewPolicy() {
+  let validCount = 0;
+  // https://stackoverflow.com/questions/6156501/read-a-file-one-line-at-a-time-in-node-js
+  const fileStream = fs.createReadStream("input.txt");
+  const readLines = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity,
+  });
+
+  for await (const line of readLines) {
+    const lineArr = line.split(": ");
+    const passwordArr = lineArr[1].split("");
+    const searchTarget = lineArr[0].slice(-1);
+    const positions = lineArr[0].slice(0, lineArr[0].length - 2).split("-");
+    const pos1 = parseInt(positions[0]);
+    const pos2 = parseInt(positions[1]);
+    if (
+      (passwordArr[pos1 - 1] === searchTarget &&
+        passwordArr[pos2 - 1] !== searchTarget) ||
+      (passwordArr[pos2 - 1] === searchTarget &&
+        passwordArr[pos1 - 1] !== searchTarget)
+    ) {
+      validCount++;
+    }
+  }
+  console.log("valid count with new policy:", validCount);
+}
+
 getValidPasswordCount();
+getValidPasswordCountNewPolicy();
