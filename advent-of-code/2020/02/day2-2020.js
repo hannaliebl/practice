@@ -1,17 +1,11 @@
-const fs = require("fs");
-const readline = require("readline");
+import { readLines } from "../readlines.js";
 
 // part 1
 async function getValidPasswordCount() {
   let validCount = 0;
-  // https://stackoverflow.com/questions/6156501/read-a-file-one-line-at-a-time-in-node-js
-  const fileStream = fs.createReadStream("input.txt");
-  const readLines = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity,
-  });
+  const lines = await readLines("input.txt");
 
-  for await (const line of readLines) {
+  for await (const line of lines) {
     const lineArr = line.split(": ");
     const password = lineArr[1];
     const searchTarget = lineArr[0].slice(-1);
@@ -29,13 +23,8 @@ async function getValidPasswordCount() {
 async function getValidPasswordCountNewPolicy() {
   let validCount = 0;
   // https://stackoverflow.com/questions/6156501/read-a-file-one-line-at-a-time-in-node-js
-  const fileStream = fs.createReadStream("input.txt");
-  const readLines = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity,
-  });
-
-  for await (const line of readLines) {
+  const lines = await readLines("input.txt");
+  for await (const line of lines) {
     const lineArr = line.split(": ");
     const passwordArr = lineArr[1].split("");
     const searchTarget = lineArr[0].slice(-1);
