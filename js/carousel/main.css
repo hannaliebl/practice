@@ -1,0 +1,18 @@
+.carousel-container {
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.carousel-image {
+  display: none;
+}
+
+.carousel-image.carousel-visible {
+  display: block;
+}
+
+.carousel-prev,
+.carousel-next {
+  z-index: 1;
+}
