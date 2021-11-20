@@ -18,3 +18,5 @@ var twoSum = function (numbers, target) {
     }
   }
 };
+
+// could also use while loop: while left < right
