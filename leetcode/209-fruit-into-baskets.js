@@ -9,11 +9,14 @@ var totalFruit = function (fruits) {
   let left = 0;
   let currentFruits = {};
   for (let right = 0; right < fruits.length; right++) {
+    // slide window to the left if we have two fruits already and the current fruit
+    // isn't in the "basket" yet (so, we have 3 fruits, which is too many for the given constraints)
     while (
       Object.keys(currentFruits).length === 2 &&
       currentFruits[fruits[right]] === undefined
     ) {
       currentFruits[fruits[left]]--;
+      // remove zeroed fruits entirely so Object.keys works above
       if (currentFruits[fruits[left]] === 0) delete currentFruits[fruits[left]];
       left++;
     }
