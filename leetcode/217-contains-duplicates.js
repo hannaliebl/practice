@@ -4,7 +4,7 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-https: var containsDuplicate = function (nums) {
+var containsDuplicate = function (nums) {
   let dict = {}; // {val: true}
   let hasDupes = false;
   for (let i = 0; i < nums.length; i++) {
