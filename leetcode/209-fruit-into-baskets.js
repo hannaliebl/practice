@@ -32,3 +32,31 @@ console.log(totalFruit([3, 3, 1, 2, 1])); // 3
 console.log(totalFruit([1, 2, 1])); // 3
 console.log(totalFruit([0, 1, 2, 2])); // 3
 console.log(totalFruit([1, 2, 3, 2, 2])); // 4
+
+// Map solution:
+var totalFruitWithMap = function (fruits) {
+  let max = 0;
+  let left = 0;
+  let basket = new Map();
+  for (let right = 0; right < fruits.length; right++) {
+    if (!basket.has(fruits[right])) {
+      basket.set(fruits[right], 1);
+    } else {
+      basket.set(fruits[right], basket.get(fruits[right]) + 1);
+    }
+    while (basket.size > 2) {
+      basket.set(fruits[left], basket.get(fruits[left]) - 1);
+      if (basket.get(fruits[left]) <= 0) {
+        basket.delete(fruits[left]);
+      }
+      left++;
+    }
+    max = Math.max(max, right - left + 1);
+  }
+  return max;
+};
+
+console.log(totalFruitWithMap([3, 3, 1, 2, 1])); // 3
+console.log(totalFruitWithMap([1, 2, 1])); // 3
+console.log(totalFruitWithMap([0, 1, 2, 2])); // 3
+console.log(totalFruitWithMap([1, 2, 3, 2, 2])); // 4

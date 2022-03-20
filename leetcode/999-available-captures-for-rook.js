@@ -4,13 +4,13 @@
  * @param {character[][]} board
  * @return {number}
  */
-https: var numRookCaptures = function (board) {
+var numRookCaptures = function (board) {
   let captures = 0;
   let rookRow = null;
   let rookIndex = null;
-  //     find row rook is in
-  //     find index of rook
-  //     explore all 4 possible moves and outcomes
+  // find row rook is in
+  // find index of rook
+  // explore all 4 possible moves and outcomes
   board.forEach((row, i) => {
     if (row.includes("R")) rookRow = i;
   });
